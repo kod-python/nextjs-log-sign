@@ -1,12 +1,12 @@
-import Signup from '@/components/Signup/Signup'
 import React from 'react'
+import ResulPage from '@/components/ResultPage/ResulPage'
 
 const page = () => {
   return (
     <div>
 
-<Signup />
-
+<ResulPage />
+        
     </div>
   )
 }
