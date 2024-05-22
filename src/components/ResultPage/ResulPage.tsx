@@ -11,17 +11,28 @@ const ResultPage = () => {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/todos/"
       );
+       
+      // FOR FETCH
+      // const data: Person[] = await response.json()
+      // setPeople(data)
+
+// FOR FETH ENDS HERE
+
+
+// with image 
+
 
       const data: Omit<Person, 'imageUrl'>[] = await response.json();
       
     
       const peopleWithImages = data.map(person => ({
         ...person,
-        imageUrl: "https://via.placeholder.com/150"
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCx3fNCN9p0iHGfu3rhuIxGd0GIS03FaoRazzHU-sfaQ&s"
       }));
       
       setPeople(peopleWithImages);
     };
+    // image ends here
 
     getPeople();
   }, []);
