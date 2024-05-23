@@ -1,14 +1,12 @@
-import React from 'react'
-import ResulPage from '@/components/ResultPage/ResulPage'
+import React from "react";
+import ResulPage from "@/components/ResultPage/ResulPage";
 
-const page = () => {
+const ResultPage = () => {
   return (
     <div>
-
-<ResulPage />
-        
+      <ResulPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default ResultPage;

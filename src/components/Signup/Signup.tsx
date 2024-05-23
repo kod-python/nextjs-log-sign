@@ -40,6 +40,7 @@ const Signup = () => {
     }
   };
 
+  
   const [people, setPeople] = useState([]);
 
   useEffect(() => {

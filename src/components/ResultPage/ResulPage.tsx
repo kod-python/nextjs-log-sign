@@ -1,59 +1,87 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-type Person = { id: number; title: string; userId: number; imageUrl: string };
+type drink = { idDrink: string; strDrink: string; strDrinkThumb: string };
 
 const ResultPage = () => {
-  const [people, setPeople] = useState<Person[]>([]);
+  const [drinks, setDrinks] = useState<drink[]>([]);
 
   useEffect(() => {
-    const getPeople = async () => {
+    const getDrinks = async () => {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/"
+        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=Champagne_flute"
       );
-       
+
       // FOR FETCH
-      // const data: Person[] = await response.json()
-      // setPeople(data)
+      const data = await response.json();
+      // console.log(data.drinks)
+      setDrinks(data.drinks);
 
-// FOR FETH ENDS HERE
+      // FOR FETH ENDS HERE
 
+      // with image
 
-// with image 
+      // const data: Omit<Person, 'imageUrl'>[] = await response.json();
 
+      // const peopleWithImages = data.map(person => ({
+      //   ...person,
+      //   imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCx3fNCN9p0iHGfu3rhuIxGd0GIS03FaoRazzHU-sfaQ&s"
+      // }));
 
-      const data: Omit<Person, 'imageUrl'>[] = await response.json();
-      
-    
-      const peopleWithImages = data.map(person => ({
-        ...person,
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCx3fNCN9p0iHGfu3rhuIxGd0GIS03FaoRazzHU-sfaQ&s"
-      }));
-      
-      setPeople(peopleWithImages);
+      // setPeople(peopleWithImages);
     };
     // image ends here
 
-    getPeople();
+    getDrinks();
   }, []);
 
-  console.log(people);
+  console.log(drinks);
 
   return (
-    <>
+    <div className="p-[300px] m-[100px]  space-y-5 ">
       <h1>json placeholder</h1>
-      {people.map((person) => (
-        <div key={person.id} className="text-orange-400">
-          <p className="bg-pink-200">
-            {person.id}
-            <p className="text-blue-700">{person.title}</p>
-            <p className="text-red-700">{person.userId}</p>
-            <img src={person.imageUrl} alt={`Person ${person.id}`} />
-          </p>
-        </div>
-      ))}
-    </>
+      <div className="flex flex-wrap justify-center  mx-4">
+        {drinks.map((drink) => (
+          <div
+            key={drink.idDrink}
+            className=" shadow-lg  p-[30px]  w-1/3  mb-3 "
+          >
+            <img
+              src={drink.strDrinkThumb}
+              alt="drinks"
+              className=" w-[200px] h-[200px] shadow-md shadow-black hover:transition-transform hover:scale-[1.2]"
+            />
+            <p className="text-center mt-[20px] pb-[30px]">{drink.strDrink}</p>
+
+            <div className="flex justify-center text-white">
+              <button className="py-2 px-4 bg-blue-500 rounded">
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
+
+  // return(
+  //   <div className="space-y-5 ">
+  //     <h1>json placeholder</h1>
+
+  //     {drinks.map((drinks) => (
+  //       <div key={drinks.idDrink}>
+  //         <img src={drinks.strDrinkThumb} alt="drinks" className="w-[300px] h-[300px] shadow-md shadow-black hover:transition-transform  " />
+  //         <p className="">
+  //           {drinks.strDrink} </p>
+
+  //           <p className="text-blue-700">{drinks.strDrinkThumb}</p>
+  //           {/* <p className="text-red-700">{drinks.userId}</p> */}
+  //           {/* <img src={Drink.imageUrl} alt={`Person ${Drink.id}`} /> */}
+
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 };
 
 export default ResultPage;
